@@ -383,12 +383,12 @@ function createMyCube() {
     geometry.faceVertexUvs[0].push(facevertexuv);
 
     //Left
-    var face = new THREE.Face3(5, 7, 4);
+    var face = new THREE.Face3(4, 6, 5);
     var facevertexuv = [uvs[0], uvs[2], uvs[1]];
     geometry.faces.push(face);
     geometry.faceVertexUvs[0].push(facevertexuv);
 
-    var face = new THREE.Face3(7, 6, 4);
+    var face = new THREE.Face3(6, 7, 5);
     var facevertexuv = [uvs[2], uvs[3], uvs[1]];
     geometry.faces.push(face);
     geometry.faceVertexUvs[0].push(facevertexuv);
@@ -429,62 +429,13 @@ function createMyCube() {
     geometry.vertices = vertices;
     geometry.mergeVertices();
 
-    // var faces = [
-    //     new THREE.Face3(0, 2, 1),
-    //     new THREE.Face3(2, 3, 1),
-    //
-    //     new THREE.Face3(4, 6, 5),
-    //     new THREE.Face3(6, 7, 5),
-    //     new THREE.Face3(4, 5, 1),
-    //     new THREE.Face3(5, 0, 1),
-    //     new THREE.Face3(7, 6, 2),
-    //     new THREE.Face3(6, 3, 2),
-    //     new THREE.Face3(5, 7, 0),
-    //     new THREE.Face3(7, 2, 0),
-    //     new THREE.Face3(1, 3, 4),
-    //     new THREE.Face3(3, 6, 4),
-    // ];
-
-    // geometry.vertices = vertices;
-    // geometry.faces = faces;
-    // geometry.mergeVertices();
-
-    // for (var i = 0; i < geometry.faces.length; i++) {
-    //     var face = geometry.faces[i];
-    //     var vertex0 = geometry.vertices[face.a];
-    //     var vertex1 = geometry.vertices[face.b];
-    //     var vertex2 = geometry.vertices[face.c];
-    //
-    //     if (i == 0 || i == 1 || i == 4 || i == 5) {
-    //         //yz
-    //         var faceuv0 = new THREE.Vector2(zoffset + (vertex0.z) / cubeDepth, yoffset + (vertex0.y) / cubeHeight);
-    //         var faceuv1 = new THREE.Vector2(zoffset + (vertex1.z) / cubeDepth, yoffset + (vertex1.y) / cubeHeight);
-    //         var faceuv2 = new THREE.Vector2(zoffset + (vertex2.z) / cubeDepth, yoffset + (vertex2.y) / cubeHeight);
-    //         geometry.faceVertexUvs[0].push([faceuv0, faceuv1, faceuv2]);
-    //     }
-    //     else if (i == 2 || i == 3 || i == 6 || i == 7) {
-    //         //xy
-    //         var faceuv0 = new THREE.Vector2(xoffset + (vertex0.x) / cubeWidth, yoffset + (vertex0.y) / cubeHeight);
-    //         var faceuv1 = new THREE.Vector2(xoffset + (vertex1.x) / cubeWidth, yoffset + (vertex1.y) / cubeHeight);
-    //         var faceuv2 = new THREE.Vector2(xoffset + (vertex2.x) / cubeWidth, yoffset + (vertex2.y) / cubeHeight);
-    //         geometry.faceVertexUvs[0].push([faceuv0, faceuv1, faceuv2]);
-    //     }
-    //     else {
-    //         //xz
-    //         var faceuv0 = new THREE.Vector2(xoffset + (vertex0.x) / cubeWidth, zoffset + (vertex0.z) / cubeDepth);
-    //         var faceuv1 = new THREE.Vector2(xoffset + (vertex1.x) / cubeWidth, zoffset + (vertex1.z) / cubeDepth);
-    //         var faceuv2 = new THREE.Vector2(xoffset + (vertex2.x) / cubeWidth, zoffset + (vertex2.z) / cubeDepth);
-    //         geometry.faceVertexUvs[0].push([faceuv0, faceuv1, faceuv2]);
-    //     }
-    // }
     return geometry;
 }
 
 try {
     init();
     var loader = new THREE.TextureLoader();
-    loader.load('test.png', function (texture) {
-
+    loader.load('shapesuv.jpg', function (texture) {
         // var triangleGeometry = createTriangle();
         // var triangleMaterial = new THREE.MeshBasicMaterial({map: texture, color: 0xFFFFFF, side: THREE.FrontSide});
         // var triangle = new THREE.Mesh(triangleGeometry, triangleMaterial);
@@ -522,7 +473,7 @@ try {
         cube.position.x = windowWidth / 2;
         cube.position.y = windowHeight / 2;
         scene.add(cube);
-        renderCube();
+        // renderCube();
         addToDOM();
     });
 } catch (e) {

@@ -60,7 +60,7 @@ try {
         addToDOM();
     })
     loader.load('resources/floor.jpg', function (texture) {
-        var geometry = createCubeWithPlane(width, height);
+        var geometry = createFloorCubeWithPlane(width, depth);
         var material = new THREE.MeshBasicMaterial({
             map: texture, side: THREE.DoubleSide
         });
@@ -72,7 +72,7 @@ try {
         addToDOM();
     })
     loader.load('resources/leftwall.jpg', function (texture) {
-        var geometry = createCubeWithPlane(width, height);
+        var geometry = createLeftRightWithPlane(depth, height);
         var material = new THREE.MeshBasicMaterial({
             map: texture, side: THREE.DoubleSide
         });
@@ -84,7 +84,7 @@ try {
         addToDOM();
     })
     loader.load('resources/rightwall.jpg', function (texture) {
-        var geometry = createCubeWithPlane(width, height);
+        var geometry = createLeftRightWithPlane(depth, height);
         var material = new THREE.MeshBasicMaterial({
             map: texture, side: THREE.DoubleSide
         });
@@ -132,9 +132,73 @@ function createCubeWithPlane(width, height) {
     return geometry;
 }
 
+function createFloorCubeWithPlane(width, height) {
+    // var geometry = new THREE.PlaneGeometry(width, height);
+    // return geometry;
+    var geometry = new THREE.Geometry();
+    var vertices = [
+        new THREE.Vector3(width, height, 0),
+        new THREE.Vector3(width, -height, 0),
+        new THREE.Vector3(-width, height, 0),
+        new THREE.Vector3(-width, -height, 0)
+    ];
+
+    var uvs = [
+        new THREE.Vector2(0, 1),
+        new THREE.Vector2(1, 1),
+        new THREE.Vector2(0, 0),
+        new THREE.Vector2(1, 0)
+    ];
+    var face = new THREE.Face3(0, 1, 2);
+    var faceVertexUvs = [uvs[0], uvs[1], uvs[2]];
+    geometry.faces.push(face);
+    geometry.faceVertexUvs[0].push(faceVertexUvs);
+
+    var face = new THREE.Face3(2, 3, 1);
+    var faceVertexUvs = [uvs[2], uvs[3], uvs[1]];
+    geometry.faces.push(face);
+    geometry.faceVertexUvs[0].push(faceVertexUvs);
+
+    geometry.vertices = vertices;
+    geometry.mergeVertices();
+    return geometry;
+}
+
+function createLeftRightWithPlane(depth, height) {
+    // var geometry = new THREE.PlaneGeometry(width, height);
+    // return geometry;
+    var geometry = new THREE.Geometry();
+    var vertices = [
+        new THREE.Vector3(depth, height, 0),
+        new THREE.Vector3(depth, -height, 0),
+        new THREE.Vector3(-depth, height, 0),
+        new THREE.Vector3(-depth, -height, 0)
+    ];
+
+    var uvs = [
+        new THREE.Vector2(0, 1),
+        new THREE.Vector2(1, 1),
+        new THREE.Vector2(0, 0),
+        new THREE.Vector2(1, 0)
+    ];
+    var face = new THREE.Face3(0, 1, 2);
+    var faceVertexUvs = [uvs[0], uvs[1], uvs[2]];
+    geometry.faces.push(face);
+    geometry.faceVertexUvs[0].push(faceVertexUvs);
+
+    var face = new THREE.Face3(2, 3, 1);
+    var faceVertexUvs = [uvs[2], uvs[3], uvs[1]];
+    geometry.faces.push(face);
+    geometry.faceVertexUvs[0].push(faceVertexUvs);
+
+    geometry.vertices = vertices;
+    geometry.mergeVertices();
+    return geometry;
+}
+
 function getFrontWallPlanePosition() {
     var position = new THREE.Vector3();
-    position.x = 1;
+    position.x = 0;
     position.y = height / 2;
     position.z = -depth;
     return position;
@@ -142,9 +206,9 @@ function getFrontWallPlanePosition() {
 
 function getFloorWallPlanePosition() {
     var position = new THREE.Vector3();
-    position.x = 1;
+    position.x = 0;
     position.y = -height / 2;
-    position.z = 1;
+    position.z = 0;
     return position;
 }
 
@@ -152,7 +216,7 @@ function getLeftWallPlanePosition() {
     var position = new THREE.Vector3();
     position.x = -width;
     position.y = height / 2;
-    position.z = 1;
+    position.z = 0;
     return position;
 }
 
@@ -160,6 +224,6 @@ function getRightWallPlanePosition() {
     var position = new THREE.Vector3();
     position.x = width;
     position.y = height / 2;
-    position.z = 1;
+    position.z = 0;
     return position;
 }
